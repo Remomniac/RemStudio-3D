@@ -1,0 +1,7 @@
+numpy
+opencv-python-headless
+PySide6
+pyqtgraph
+PyOpenGL
+mapbox_earcut
+onnxruntime

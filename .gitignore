@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Build-Ausgaben (PyInstaller)
+build/
+dist/
+dist_neu/
+
+# Projekt- und Exportdateien aus Tests
+*.remstudio
+*.rahmen
+*.stl
+
+# System
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Ergebnisse von build.bat (gehören in GitHub-Releases, nicht ins Repository)
+/RemStudio3D.exe
+/RemStudio3D_files/
+/RemStudio3D-Setup.exe
+/version_info.txt
