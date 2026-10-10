@@ -122,7 +122,8 @@
     .venv\Scripts\python.exe make_video.py --ss 1 --fps 24        # schneller Entwurf (weniger Kantenglättung)
     --crf 20   # Qualität/Dateigröße (höher = kleiner); GitHub erlaubt Videos bis 10 MB (kostenloses Konto)
 **Aufbau (Zeitachse in `make_video.py` oben):** 01 Input (Zeichnung zeichnet sich) · 02 Stege (16 Inseln, 16 Stege – echte Werte) · 03 3D (kippen + extrudieren) · 04 Rahmenformen · 05 App (KI-Editor, Prüfung mit Zoom) · 06 Druck (Schicht für Schicht, Farbwechsel-Höhe) · Abspann.
-**Auf GitHub einbinden:** README auf github.com bearbeiten (Stift-Symbol) → MP4 an die gewünschte Stelle ziehen → GitHub lädt hoch und setzt einen `https://github.com/user-attachments/assets/…`-Link ein → „Commit changes“. Alternativ den Link an Claude geben, Claude fügt ihn in `README.md`/`README.de.md` ein.
+**Auf GitHub einbinden:** README auf github.com bearbeiten (Stift-Symbol) → MP4 ins Textfeld ziehen → GitHub lädt hoch und setzt einen `https://github.com/user-attachments/assets/…`-Link ein → Link an Claude geben (nicht committen), Claude setzt ihn in `README.md` + `README.de.md` als eigene Zeile nach dem Einleitungstext ein und pusht. Upload über die Browser-Erweiterung klappt bei 6,5 MB nicht (F-032).
+**Aktuell eingebunden:** `https://github.com/user-attachments/assets/638e6862-8196-46f1-b1a4-5eaf2d8c4b78` (v1 des Videos). Neues Video → neu hochladen und den Link in beiden READMEs ersetzen.
 **Typische Fehler:** „docs/images/… missing“ → erst `make_screenshots.py`; Shader-/Zugriffsfehler siehe F-029/F-030.
 **Im Code:** `make_video.py` → `main()` (`frame(t)` zeichnet ein Bild), `Renderer3D`, `text_block()`, `demo_strokes()`
 

@@ -246,3 +246,17 @@
 **Vorbeugen:** Screenshots nur über `make_screenshots.py` erzeugen.
 
 > F-028 (Installer aus langem Ordnerpfad) steht im lokalen Branch `signpath` – gehört zur zurückgestellten SignPath-Vorbereitung.
+
+## F-032 – Video-Upload über die Browser-Erweiterung bricht ab
+**Status:** 🟡 Workaround
+**Wann/Wo:** 2026-10-10 · Claude in Chrome (Brave) → `file_upload` in GitHubs README-Editor · Datei `RemStudio3D-launch.mp4` (6,5 MB)
+**Fehlermeldung:**
+    The "file_upload" tool call was sent, but the connection was lost before its result came back.
+**Nachstellen:** README auf github.com bearbeiten, MP4 per Erweiterung in das Datei-Feld `blob-dragged-file-input` hochladen.
+**Ursache:** unklar, Vermutung: die Datei (als Base64 ~9 MB) ist zu groß für die Verbindung zur Erweiterung.
+**Versuche:**
+1. `file_upload` → ❌ Verbindung verloren, nichts hochgeladen
+2. dasselbe nochmal → ❌ gleich (danach abgebrochen)
+3. Nutzer zieht die Datei selbst in den Editor (Explorer per Claude geöffnet), schickt Claude den Link → ✅
+**Lösung:** Nutzer lädt hoch, Claude baut den Link `https://github.com/user-attachments/assets/…` in `README.md`/`README.de.md` ein und pusht.
+**Vorbeugen:** große Dateien nicht über die Erweiterung hochladen. Nur über GitHub hochgeladene Videos werden in der README als Player angezeigt (Video im Repo reicht nicht).

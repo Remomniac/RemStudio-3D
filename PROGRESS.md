@@ -10,7 +10,7 @@ Windows-App, die Bilder/Zeichnungen (v. a. Comics) in druckfertige 3D-Wandbilder
   automatische Stege, Druckbarkeits-Prüfung, Pinsel/Radierer/Steg, Rückplatte, Aufhängung, 3D-Vorschau,
   STL/SVG/PNG-Export mit Aufteilen, Projekte (`.remstudio`), GPU-Vorschau, dunkles Design (Orange), Englisch/Deutsch.
 - Installer (Inno Setup 6.7, dunkel, pro Benutzer, en/de) und Build-Skript `build.bat` → EXE + Setup im Hauptordner.
-- README englisch (`README.md`) + deutsch (`README.de.md`) neu gestaltet: Banner, 3D-Animation, Screenshots, eigene Icons
+- README englisch (`README.md`) + deutsch (`README.de.md`) neu gestaltet: Banner, Launch-Video, 3D-Animation, Screenshots, eigene Icons
   (Bilder per `make_screenshots.py` → `docs/images/`); GitHub-Beschreibung/Topics/Release-Text englisch.
 - Doku-System nach `CLAUDE.md` eingerichtet (`docs/`), Schnelltest `tests/smoke_test.py` (alle grün).
 - Release-Texte liegen in `docs/release-notes/`.
@@ -18,8 +18,7 @@ Windows-App, die Bilder/Zeichnungen (v. a. Comics) in druckfertige 3D-Wandbilder
 - Projektordner heißt jetzt `RemStudio Projekt`; Übergabe-Prompt in `UEBERGABE.md`.
 
 ## Nächste Schritte
-1. Nutzer lädt `docs/images/social-preview.png` in GitHub → Settings → Social preview hoch und das Launch-Video
-   `RemStudio3D-launch.mp4` (per `make_video.py`) in die README (Datei im GitHub-Editor hineinziehen).
+1. Nutzer lädt `docs/images/social-preview.png` in GitHub → Settings → Social preview hoch.
 2. Wünsche des Nutzers abwarten. SignPath erst auf Wunsch fortsetzen (Branch `signpath` auf `main` rebasen).
 
 ## Offene Fehler (Details in docs/FEHLER.md)
@@ -44,6 +43,7 @@ Windows-App, die Bilder/Zeichnungen (v. a. Comics) in druckfertige 3D-Wandbilder
 - EXE: `set REMSTUDIO_SELFTEST=%TEMP%\st.txt` + `RemStudio3D.exe` → Datei beginnt mit `ok`
 
 ## Changelog (neueste oben, max. 15 Zeilen – Details in docs/LOG.md)
+- 2026-10-10 – Launch-Video in README EN/DE eingebunden – README*.md – siehe LOG.md
 - 2026-10-10 – Launch-Video (englisch) per Code – make_video.py – siehe LOG.md
 - 2026-10-10 – GitHub-Seite neu gestaltet (Bilder, Icons, README EN/DE); SignPath in Branch `signpath` zurückgestellt – siehe LOG.md
 - 2026-10-10 – Release v1.0.1 (Bugfix F-026) – __init__.py, .gitignore, docs/release-notes/v1.0.1.md – siehe LOG.md

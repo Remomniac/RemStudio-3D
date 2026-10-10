@@ -172,3 +172,8 @@
 **Ergebnis:** ✅ RemStudio3D-launch.mp4 – 39 s, 1920×1080, 30 fps, H.264, 6,5 MB (unter GitHubs 10-MB-Grenze), Renderzeit ~2 min. Zweiter Durchgang: Hintergrund-Verlauf entfernt (Banding nach Kompression), 3D-Abstand vergrößert (Ecke abgeschnitten), CRF 20 → 18.
 **Getestet:** 14 Vorschau-Bilder über alle Szenen angesehen; fertiges Video mit ffprobe/Einzelbildern geprüft.
 **Offen:** Nutzer lädt das MP4 auf GitHub hoch (README bearbeiten → Datei hineinziehen).
+
+### ~18:10 – Launch-Video in die README eingebunden
+**Warum:** Nutzer: „Kannst du das nicht einfach selber in die README packen?“
+**Gemacht:** Upload über die Erweiterung in Brave versucht (2×, F-032) → Explorer mit der Datei geöffnet, Nutzer hat sie in den GitHub-Editor gezogen und den Link geschickt. Link in `README.md` + `README.de.md` nach dem Einleitungstext eingefügt, unbestätigte Änderung im GitHub-Editor verworfen (nichts dort committet), gepusht.
+**Ergebnis:** ✅ Video-Player auf github.com/Remomniac/RemStudio-3D sichtbar (geprüft in Brave: `<video>`-Element vorhanden).
