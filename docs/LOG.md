@@ -177,3 +177,9 @@
 **Warum:** Nutzer: „Kannst du das nicht einfach selber in die README packen?“
 **Gemacht:** Upload über die Erweiterung in Brave versucht (2×, F-032) → Explorer mit der Datei geöffnet, Nutzer hat sie in den GitHub-Editor gezogen und den Link geschickt. Link in `README.md` + `README.de.md` nach dem Einleitungstext eingefügt, unbestätigte Änderung im GitHub-Editor verworfen (nichts dort committet), gepusht.
 **Ergebnis:** ✅ Video-Player auf github.com/Remomniac/RemStudio-3D sichtbar (geprüft in Brave: `<video>`-Element vorhanden).
+
+### Session-Abschluss (Chat 3)
+**Erledigt:** Release v1.0.1 (Bugfix F-026) mit Setup + Portable-ZIP; GitHub-Seite neu gestaltet (Banner, „So geht's“, Rahmenformen, GIF, Screenshots EN/DE, eigene Icons, `make_screenshots.py`); Launch-Video per Code (`make_video.py`, 39 s, 6,5 MB) und in beide READMEs eingebunden; SignPath-Signierung vorbereitet, aber auf Wunsch zurückgestellt (lokaler Branch `signpath`).
+**Nicht geschafft / offen:** Social-Preview-Bild hochladen (macht der Nutzer: Settings → Social preview); SignPath nur auf Wunsch.
+**Neue/geänderte Fehler:** F-027 (build.bat aus PowerShell-Tool) 🟡, F-028 (langer Pfad, nur im Branch `signpath`) 🟢, F-029 (numpy/QImage-Absturz) 🟢, F-030 (zweite 3D-Ansicht, Shader) 🟢, F-031 (Screenshots: leer/Skalierung/Schrift) 🟢, F-032 (Video-Upload über Erweiterung) 🟡.
+**Neue/geänderte Anleitungen:** „Release“ (ZIP-Befehl, Release-Text-Vorlagen), „Bilder für die GitHub-Seite – make_screenshots.py“, „Launch-Video – make_video.py“.

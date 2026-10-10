@@ -24,6 +24,7 @@ Windows-App, die Bilder/Zeichnungen (v. a. Comics) in druckfertige 3D-Wandbilder
 ## Offene Fehler (Details in docs/FEHLER.md)
 - F-025 – SmartScreen „Der Computer wurde durch Windows geschützt“ beim Installer (unsigniert) – 🟡 Workaround: „Weitere Informationen → Trotzdem ausführen“
 - F-027 – `cmd /c build.bat` aus Claudes PowerShell „nicht gefunden“ – 🟡 Workaround: `build.py` direkt
+- F-032 – Video-Upload über die Browser-Erweiterung bricht ab – 🟡 Workaround: Nutzer zieht die Datei selbst in den GitHub-Editor
 
 ## Wichtige Dateien
 - `app.py` – Start, Sprache/Locale, EXE-Selbsttest (`REMSTUDIO_SELFTEST`)
