@@ -18,7 +18,8 @@ Windows-App, die Bilder/Zeichnungen (v. a. Comics) in druckfertige 3D-Wandbilder
 - Projektordner heißt jetzt `RemStudio Projekt`; Übergabe-Prompt in `UEBERGABE.md`.
 
 ## Nächste Schritte
-1. Nutzer lädt `docs/images/social-preview.png` in GitHub → Settings → Social preview hoch.
+1. Nutzer lädt `docs/images/social-preview.png` in GitHub → Settings → Social preview hoch und das Launch-Video
+   `RemStudio3D-launch.mp4` (per `make_video.py`) in die README (Datei im GitHub-Editor hineinziehen).
 2. Wünsche des Nutzers abwarten. SignPath erst auf Wunsch fortsetzen (Branch `signpath` auf `main` rebasen).
 
 ## Offene Fehler (Details in docs/FEHLER.md)
@@ -36,12 +37,14 @@ Windows-App, die Bilder/Zeichnungen (v. a. Comics) in druckfertige 3D-Wandbilder
 - `build.py`, `build.bat`, `RemStudio3D.spec`, `installer/RemStudio3D.iss` – Build + Installer
 - `tests/smoke_test.py` – Schnelltest
 - `make_screenshots.py`, `docs/images/` – Bilder der GitHub-Seite
+- `make_video.py` – Launch-Video (→ `RemStudio3D-launch.mp4`, nicht im Repo)
 
 ## Testen
 - `.venv\Scripts\python.exe tests\smoke_test.py` → „✅ Alle Tests bestanden“
 - EXE: `set REMSTUDIO_SELFTEST=%TEMP%\st.txt` + `RemStudio3D.exe` → Datei beginnt mit `ok`
 
 ## Changelog (neueste oben, max. 15 Zeilen – Details in docs/LOG.md)
+- 2026-10-10 – Launch-Video (englisch) per Code – make_video.py – siehe LOG.md
 - 2026-10-10 – GitHub-Seite neu gestaltet (Bilder, Icons, README EN/DE); SignPath in Branch `signpath` zurückgestellt – siehe LOG.md
 - 2026-10-10 – Release v1.0.1 (Bugfix F-026) – __init__.py, .gitignore, docs/release-notes/v1.0.1.md – siehe LOG.md
 - 2026-10-10 – Projektordner → „RemStudio Projekt“, UEBERGABE.md, Release-Text-Vorlage – siehe LOG.md

@@ -75,3 +75,8 @@
 ## 2026-10-10 – SignPath-Signierung vorerst zurückgestellt
 **Gewählt:** Vorbereitung (GitHub-Actions-Workflow, `CODE_SIGNING.md`, `.signpath/`, `requirements-build.txt`, `build.py --skip-installer/--installer-from`) liegt fertig im **lokalen Branch `signpath`** (Commit 05def7e, nicht gepusht) – Nutzer will das vorerst nicht veröffentlichen. Hauptzweig + README ohne SignPath-Hinweise.
 **Später fortsetzen:** `git checkout signpath`, auf aktuellen `main` rebasen (`git rebase main`), Konflikte in Doku/README lösen, dann wie in der dortigen ANLEITUNG „SignPath-Signierung einrichten“.
+
+## 2026-10-10 – Launch-Video per Code statt Videoschnitt
+**Gewählt:** `make_video.py` rendert jedes Bild mit Qt (Text/2D) + pyqtgraph (3D, freigestellt per Schwarz/Weiß-Trick, 2× Supersampling) und schickt es an ffmpeg (imageio-ffmpeg). Inhalte nur aus echten Programmdaten (Beispielbild, `process()`-Ergebnis: 16 Inseln/16 Stege, `build_meshes()`, Farbwechsel-Höhe 1,20 mm) – wirkt glaubwürdig, nicht wie „KI-Slop“.
+**Gestaltung:** feste Textspalte links mit Kapitel-System „01–06“ + Fortschrittsbalken, Monospace-Details (Dateiname, Zähler), Wort-für-Wort-Einblendung mit Easing, keine Effekte wie Lens-Flares/Glitch, eine Akzentfarbe (Orange). Ohne Ton (GitHub spielt stumm ab).
+**Alternativen:** Bildschirmaufnahme der App (unruhig, persönliche Daten sichtbar, schwer reproduzierbar); KI-Videogeneratoren (unscharfe/erfundene Oberfläche).

@@ -112,6 +112,20 @@
 **Typische Fehler:** leere 2D-Vorschau (F-031), kaputte 3D-Ansicht/Shader-Fehler (F-030), Absturz „access violation“ (F-029), grauer Rand/abgeschnittene Texte bei 125 % Skalierung (F-031).
 **Im Code:** `make_screenshots.py` → `main()`, `render()` (freigestelltes 3D-Bild per Schwarz/Weiß-Trick), `card_background()`, `shadowed()`
 
+## Launch-Video – `make_video.py`
+**Wofür:** rendert das englische Vorstellungs-Video (1920×1080, 30 fps, H.264, ~39 s) komplett aus echtem Programmcode: Beispielbild, echte Stege/Inseln, echte 3D-Netze, README-Screenshots.
+**Voraussetzungen:** `.venv`; `.venv\Scripts\python.exe -m pip install imageio-ffmpeg` (bringt ffmpeg mit, nur Werkzeug); vorher `make_screenshots.py` gelaufen (braucht `docs/images/editor.png`, `main.png`).
+**So geht's:** Befehl starten, kleines Hilfsfenster („rendering video …“) offen lassen, ca. 5–10 Minuten warten. Ergebnis `RemStudio3D-launch.mp4` im Projektordner (per `.gitignore` nicht im Repo).
+**Aufruf / Optionen:**
+    .venv\Scripts\python.exe make_video.py                        # volles Video
+    .venv\Scripts\python.exe make_video.py --preview 2.6 12 30    # nur Einzelbilder (Sekunden) → .preview\video\frame_*.png
+    .venv\Scripts\python.exe make_video.py --ss 1 --fps 24        # schneller Entwurf (weniger Kantenglättung)
+    --crf 20   # Qualität/Dateigröße (höher = kleiner); GitHub erlaubt Videos bis 10 MB (kostenloses Konto)
+**Aufbau (Zeitachse in `make_video.py` oben):** 01 Input (Zeichnung zeichnet sich) · 02 Stege (16 Inseln, 16 Stege – echte Werte) · 03 3D (kippen + extrudieren) · 04 Rahmenformen · 05 App (KI-Editor, Prüfung mit Zoom) · 06 Druck (Schicht für Schicht, Farbwechsel-Höhe) · Abspann.
+**Auf GitHub einbinden:** README auf github.com bearbeiten (Stift-Symbol) → MP4 an die gewünschte Stelle ziehen → GitHub lädt hoch und setzt einen `https://github.com/user-attachments/assets/…`-Link ein → „Commit changes“. Alternativ den Link an Claude geben, Claude fügt ihn in `README.md`/`README.de.md` ein.
+**Typische Fehler:** „docs/images/… missing“ → erst `make_screenshots.py`; Shader-/Zugriffsfehler siehe F-029/F-030.
+**Im Code:** `make_video.py` → `main()` (`frame(t)` zeichnet ein Bild), `Renderer3D`, `text_block()`, `demo_strokes()`
+
 ## Installer testen (ohne Risiko)
 **Wofür:** Installation/Deinstallation prüfen, ohne den PC des Nutzers zu verändern.
 **Aufruf (Git-Bash, Testordner statt echtem Ziel):**

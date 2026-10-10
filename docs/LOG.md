@@ -158,3 +158,17 @@
     git reset --hard origin/main
     git checkout d25fafe -- make_screenshots.py docs/images README.md README.de.md
 **Ergebnis:** ✅ siehe Push unten.
+
+### ~17:45 – Launch-Video erstellt
+**Warum:** Nutzer wünscht ein englisches Launch-Video „mit coolen Animationen, nicht wie KI-Slop“ zum Hochladen auf GitHub.
+**Gemacht:** `make_video.py` geschrieben (Storyboard 6 Kapitel + Abspann, ~39 s), Vorschau-Einzelbilder geprüft und verbessert (abgeschnittene Unterlängen in Überschriften, Screenshot-Zoom über der Textspalte → weicher Rand, größere 3D-Modelle, Druck-Szene am Rand), dann voll gerendert.
+**Dateien:** `make_video.py` neu; `.gitignore` → `/*.mp4`.
+**Befehle:**
+    .venv\Scripts\python.exe -m pip install imageio-ffmpeg
+    .venv\Scripts\python.exe make_video.py --ss 1 --preview 1.2 2.6 … 37.5
+    .venv\Scripts\python.exe make_video.py --ss 2
+**Ausgabe (Fehler unterwegs):**
+    TypeError: 'Result' object is not subscriptable   → process() liefert ein Objekt (res.bridges statt res["bridges"])
+**Ergebnis:** ✅ RemStudio3D-launch.mp4 – 39 s, 1920×1080, 30 fps, H.264, 6,5 MB (unter GitHubs 10-MB-Grenze), Renderzeit ~2 min. Zweiter Durchgang: Hintergrund-Verlauf entfernt (Banding nach Kompression), 3D-Abstand vergrößert (Ecke abgeschnitten), CRF 20 → 18.
+**Getestet:** 14 Vorschau-Bilder über alle Szenen angesehen; fertiges Video mit ffprobe/Einzelbildern geprüft.
+**Offen:** Nutzer lädt das MP4 auf GitHub hoch (README bearbeiten → Datei hineinziehen).
