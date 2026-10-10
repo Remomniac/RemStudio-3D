@@ -30,6 +30,8 @@ piece with a matching frame. Load an image, tweak a few sliders, export an STL a
 No 3D modelling skills required: loose parts are connected automatically and every line is checked for
 printability.
 
+https://github.com/user-attachments/assets/638e6862-8196-46f1-b1a4-5eaf2d8c4b78
+
 <p align="center">
   <img src="docs/images/steps.png" alt="How it works: load an image, get a printable motif, export and print" width="100%">
 </p>

@@ -30,6 +30,8 @@
 3D-Drucker. Ganz ohne 3D-Kenntnisse: Lose Teile werden automatisch verbunden und jede Linie wird auf Druckbarkeit
 geprüft.
 
+https://github.com/user-attachments/assets/638e6862-8196-46f1-b1a4-5eaf2d8c4b78
+
 <p align="center">
   <img src="docs/images/steps-de.png" alt="So geht's: Bild laden, druckbares Motiv, exportieren und drucken" width="100%">
 </p>
