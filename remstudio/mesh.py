@@ -117,7 +117,8 @@ def mask_polygons(mask: np.ndarray, ppm: float, simplify_px: float = 0.6, origin
             holes = []
             for hi in hole_idx:
                 hp = conv(contours[hi], simplify)
-                if len(hp) >= 3 and abs(_signed_area(hp)) > 1e-6:
+                # winzige Löcher (< 0,05 mm², nicht druckbar) weglassen – sie können die Triangulierung stören
+                if len(hp) >= 3 and abs(_signed_area(hp)) > 0.05:
                     holes.append(hp)
             return outer, holes
 

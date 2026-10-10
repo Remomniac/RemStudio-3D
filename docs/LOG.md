@@ -1,0 +1,97 @@
+# Arbeitsprotokoll – RemStudio 3D
+
+> Chronik, wird nicht nachträglich geändert. Die Einträge bis „Doku-System eingerichtet“ wurden am 2026-10-10
+> **nachgetragen** (Zeiten ungefähr, aus zwei Chat-Sitzungen). Fehler-Details: `docs/FEHLER.md`.
+
+## Session 2026-10-10 ~10:50 (Chat 1)
+**Ausgangslage:** neues Projekt; Nutzer zeigt Foto eines schwarzen, gelaserten Comic-Wandbilds im quadratischen Rahmen.
+**Vorhaben:** Windows-Software, die Bilder in solche Rahmen als 3D-Druck-Projekt verwandelt, mit Einstellmöglichkeiten, einfach bedienbar.
+
+### ~10:55 – Entwicklungsumgebung
+**Warum:** Kein Python/.NET-SDK installiert.
+**Gemacht:** Python 3.12 per winget (Benutzer), venv + Pakete.
+**Befehle:**
+    winget install --id Python.Python.3.12 --scope user --silent
+    python -m venv .venv && .venv\Scripts\python.exe -m pip install numpy opencv-python-headless PySide6 pyqtgraph PyOpenGL mapbox_earcut pyinstaller
+**Ergebnis:** ✅
+
+### ~11:05 – Bildverarbeitung + 3D-Netz (Kern)
+**Gemacht:** `processing.py` (Params, Schwellwert/Adaptiv/Kanten, Glätten, Flecken, Rahmenformen, Platzierung, Stege per MST, Analyse dünn/eng, Aufhängung, Wandansicht), `mesh.py` (Konturen → earcut → Extrusion, STL binär).
+**Fehler:** F-001 (Otsu = 0), F-002 (Öse dünner Hals), F-003 (fehlendes Dreieck) → alle gelöst.
+**Ergebnis:** ✅ alle Formen × Rückplatte geschlossene Netze.
+
+### ~11:20 – Oberfläche, Export, Projekte, EXE
+**Gemacht:** Hauptfenster (Vorschau mit Zoom/Pinsel/Radierer/Steg, Abschnitte ①–⑥, Prüfung, Undo/Redo), Export-Dialog (STL getrennt/kombiniert, Aufteilen, SVG, PNG), Projekte, 3D-Ansicht, Beispielbild, Zuschneiden (auto + Rechteck), PyInstaller-EXE + Selbsttest.
+**Fehler:** F-004, F-005, F-006, F-007, F-008, F-009 → gelöst/umgangen.
+**Getestet:** Smoke-Test (Pinsel, Undo, 3D, Projekt, Export, Zuschnitt) ✅; EXE-Selbsttest `ok`.
+
+### ~11:40 – Nutzer-Feedback 1: Undo-Knöpfe sichtbar, Hintergrund entfernen
+**Gemacht:** Undo/Redo dauerhaft in der Leiste; `bgremove.py` (rembg-ONNX, GrabCut, Verfeinern), `bg_editor.py` (Editor mit KI, Rechteck, Behalten/Entfernen-Pinsel, Rand/Löcher/Streuteile/Umriss); Maske im Undo + Projekt. Modelle isnet-anime/general-use/u2netp nach `%LOCALAPPDATA%\…\models` geladen.
+**Entscheidung:** Standard isnet-anime (general-use schnitt Schultern ab).
+**Fehler:** F-011 (Tests verstellten Einstellungen).
+
+### ~12:00 – Nutzer-Feedback 2: Striche beim Pinsel, Original durchscheinen lassen
+**Gemacht:** F-010 gelöst (FullViewportUpdate); Editor-Ansicht „Bearbeiten“: entfernte Bereiche halbtransparent über Karomuster, Grenze türkis, Regler „sichtbar %“.
+**Ergebnis:** ✅
+
+## Session 2026-10-10 ~12:30 (Chat 2)
+**Ausgangslage:** Programm fertig, Nutzer testet.
+**Vorhaben:** Leistung, modernes dunkles Design, Feinschliff, Umbenennung, Sprachen, Installer, GitHub.
+
+### ~12:35 – GPU-Vorschau + dunkles „Liquid Glass“-Design
+**Warum:** Oberfläche laggy, springt beim Einstellen; Motiv verschieben ruckelt; Wunsch nach modernem Dark-Mode.
+**Gemacht:** `render_layers()` (Basis + Motiv-Ebene), OpenGL-Viewport, Motiv-Transformation per GPU, Szene in mm, kein Halbauflösungs-Wechsel; `theme.py`, `Toggle`, `CompactSlider`, schwebende Inseln (`CanvasArea`), Fluent-Icons.
+**Fehler:** F-013, F-014, F-015, F-016.
+**Ergebnis:** ✅ Motiv verschieben ≈ 4 ms statt ≈ 200 ms.
+
+### ~13:05 – Mausrad nur über Zahl; 3D hell; Prüfung feste Höhe; Akzent Orange
+**Gemacht:** `Slider` ignoriert Rad (F-017), Prüfungs-Kasten 196 px mit eigenem Scrollen, 3D-Hintergrund hell, ACCENT `#f97316`.
+**Ergebnis:** ✅
+
+### ~13:20 – Präzise Regler + Hintergrund-Schritt nach dem Laden
+**Gemacht:** mm-Werte 2 Nachkommastellen, Shift-Feinjustierung; Editor öffnet nach Laden (Onboarding „Weiter / Hintergrund behalten“, abschaltbar).
+**Getestet:** 0,61 mm übernommen; Shift: 100 px → +0,19 mm statt +1,90 mm ✅
+
+### ~13:40 – Umbenennung zu „RemStudio 3D“, neues Logo, Git-Vorbereitung
+**Gemacht:** alles umbenannt (Paket `remstudio/`, EXE, Registry, Datenordner, `.remstudio`), Einstellungen + Modelle einmalig übernommen, altes verworfen; Logo (Kamera + „R“), `.gitignore`, README.
+**Fehler:** F-024 (Ordner gesperrt).
+**Ergebnis:** ✅ Alt-Name in EXE und Quellen: keine Treffer.
+
+### ~14:10 – Sprachen EN/DE, Hauptordner-EXE, Installer
+**Gemacht:** `i18n.py` (≈ 300 Texte), EN/DE-Knopf, Locale/Qt-Übersetzung; `build.py`/`build.bat`, `contents_directory=RemStudio3D_files`, Version 1.0.0; Inno Setup 6.7 installiert, `installer/RemStudio3D.iss` (dunkel, pro Benutzer, en/de, Deinstallation fragt nach Daten).
+**Fehler:** F-020, F-021, F-022, **F-023 (Installer mitten in Installation beendet – bereinigt)**.
+**Getestet:** Englisch-Check 0 deutsche Reste; stille Installation + Selbsttest + stille Deinstallation ✅; Setup 82 MB.
+
+### ~14:40 – GitHub-Upload v1.0.0
+**Gemacht:** GitHub CLI per winget, Login durch Nutzer (Gerätecode), Repo-lokale Git-Identität (noreply), Commit, Tag `v1.0.0`, Push, Release mit `RemStudio3D-Setup.exe` + `RemStudio3D-1.0.0-portable.zip`.
+**Befehle:**
+    git init -b main; git commit …; git tag -a v1.0.0 …; git push -u origin main; git push origin v1.0.0
+    <GH> release create v1.0.0 RemStudio3D-Setup.exe <…>\RemStudio3D-1.0.0-portable.zip --title "RemStudio 3D v1.0.0" --notes-file … --latest
+**Ergebnis:** ✅ https://github.com/Remomniac/RemStudio-3D/releases/tag/v1.0.0
+
+### ~14:50 – MIT-Lizenz
+**Gemacht:** `LICENSE` (MIT, © 2026 Remomniac), README-Abschnitt + Badges, Release-Text ergänzt; GitHub erkennt „MIT License“.
+**Ergebnis:** ✅ (Commit nach dem Tag v1.0.0, Binärdateien unverändert)
+
+### ~15:00 – Englische README + GitHub-Texte, SmartScreen
+**Gemacht:** `README.md` englisch, `README.de.md` deutsch (Sprach-Links), SmartScreen-Hinweis; Repo-Beschreibung + Topics + Release-Text englisch; Recherche Code-Signierung (→ ENTSCHEIDUNGEN).
+**Fehler:** F-025 (SmartScreen, Workaround).
+**Ergebnis:** ✅ gepusht
+
+### ~15:15 – Doku-System nach CLAUDE.md, Smoke-Test im Repo, Bugfix F-026
+**Warum:** Nutzer will bald neuen Chat starten; Regeln aus `CLAUDE.md` umsetzen.
+**Gemacht:** `CLAUDE.md` (§8 ausgefüllt), `PROGRESS.md`, `docs/LOG.md`, `docs/FEHLER.md`, `docs/ANLEITUNG.md`, `docs/ENTSCHEIDUNGEN.md`; `tests/smoke_test.py` neu (vorher lagen Tests nur im Temp-Ordner). Der neue Test fand F-026 → behoben.
+**Dateien:** `remstudio/processing.py` → `process()`: nach Aufhängung `fill_small_holes(combined, max(p.min_hole_mm2, 0.2)·ppm²)`; `remstudio/mesh.py` → `mask_polygons()`: Löcher ≤ 0,05 mm² ignorieren.
+**Befehle:**
+    .venv\Scripts\python.exe tests\smoke_test.py
+**Ausgabe (vor dem Fix):**
+    ❌ 3D-Netz geschlossen: circle, Rückplatte=False, motiv – 91400 Dreiecke
+    ❌ 3D-Netz geschlossen: circle, Rückplatte=True, motiv – 74300 Dreiecke
+**Ergebnis:** ✅ `Alle Tests bestanden`; zusätzlich 5 Formen × Rückplatte bei 10 und 16 px/mm geschlossen.
+**Offen:** Fix + Doku + Test nur **lokal committet** (nicht gepusht); Release v1.0.0 enthält den Fehler noch → v1.0.1 empfohlen.
+
+### Session-Abschluss
+**Erledigt:** komplette App v1.0.0 inkl. Installer, GitHub-Release, Lizenz, englische Texte, Doku-System, Smoke-Test, Bugfix F-026.
+**Nicht geschafft / offen:** Push + Release v1.0.1 (Nutzer fragen); Code-Signierung (F-025, SignPath vorbereiten auf Wunsch).
+**Neue/geänderte Fehler:** F-001 … F-026 angelegt (F-025 🟡, sonst 🟢).
+**Neue/geänderte Anleitungen:** ANLEITUNG.md komplett neu (Bedienung, Sprache, Einstellungen, Modelle, start.bat, Smoke-Test, Build, Selbsttest, Logo, Installer-Test, Release, GitHub-Texte).

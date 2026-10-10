@@ -586,6 +586,9 @@ def process(src_gray: np.ndarray, edits: np.ndarray | None, p: Params, ppm: floa
     if p.frame_shape != FRAME_NONE and p.hang != HANG_NONE:
         combined, ring, outer = apply_hanging(p, ppm, combined, ring, outer, top, w, h_body, warnings)
 
+    # Stege, Verstärkung und Rahmen können neue winzige Löcher erzeugen -> nochmals schließen
+    # (sonst scheitert ggf. die 3D-Triangulierung, siehe docs/FEHLER.md F-026)
+    combined = fill_small_holes(combined, max(p.min_hole_mm2, 0.2) * ppm * ppm)
     combined = fix_diagonals(combined)
 
     # ---- 9) Analyse
