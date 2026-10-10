@@ -10,15 +10,16 @@ Windows-App, die Bilder/Zeichnungen (v. a. Comics) in druckfertige 3D-Wandbilder
   automatische Stege, Druckbarkeits-Prüfung, Pinsel/Radierer/Steg, Rückplatte, Aufhängung, 3D-Vorschau,
   STL/SVG/PNG-Export mit Aufteilen, Projekte (`.remstudio`), GPU-Vorschau, dunkles Design (Orange), Englisch/Deutsch.
 - Installer (Inno Setup 6.7, dunkel, pro Benutzer, en/de) und Build-Skript `build.bat` → EXE + Setup im Hauptordner.
-- README englisch (`README.md`) + deutsch (`README.de.md`); GitHub-Beschreibung/Topics/Release-Text englisch.
+- README englisch (`README.md`) + deutsch (`README.de.md`) neu gestaltet: Banner, 3D-Animation, Screenshots, eigene Icons
+  (Bilder per `make_screenshots.py` → `docs/images/`); GitHub-Beschreibung/Topics/Release-Text englisch.
 - Doku-System nach `CLAUDE.md` eingerichtet (`docs/`), Schnelltest `tests/smoke_test.py` (alle grün).
-- Alles gepusht, `main` = `origin/main`. Release-Texte liegen in `docs/release-notes/`.
+- Release-Texte liegen in `docs/release-notes/`.
+- SignPath-Vorbereitung fertig, aber **zurückgestellt** – nur im lokalen Branch `signpath` (siehe ENTSCHEIDUNGEN).
 - Projektordner heißt jetzt `RemStudio Projekt`; Übergabe-Prompt in `UEBERGABE.md`.
 
 ## Nächste Schritte
-1. SmartScreen-Warnung (F-025): auf Wunsch SignPath-Foundation-Signierung vorbereiten (GitHub-Actions-Build +
-   „Code Signing Policy“-Seite); Antrag stellt der Nutzer selbst auf signpath.org.
-2. Sonst: Wünsche/Rückmeldungen des Nutzers zu v1.0.1 abwarten.
+1. Nutzer lädt `docs/images/social-preview.png` in GitHub → Settings → Social preview hoch.
+2. Wünsche des Nutzers abwarten. SignPath erst auf Wunsch fortsetzen (Branch `signpath` auf `main` rebasen).
 
 ## Offene Fehler (Details in docs/FEHLER.md)
 - F-025 – SmartScreen „Der Computer wurde durch Windows geschützt“ beim Installer (unsigniert) – 🟡 Workaround: „Weitere Informationen → Trotzdem ausführen“
@@ -34,12 +35,14 @@ Windows-App, die Bilder/Zeichnungen (v. a. Comics) in druckfertige 3D-Wandbilder
 - `remstudio/theme.py` / `widgets.py` / `canvas.py` – Design, Bedienelemente, GPU-Vorschau
 - `build.py`, `build.bat`, `RemStudio3D.spec`, `installer/RemStudio3D.iss` – Build + Installer
 - `tests/smoke_test.py` – Schnelltest
+- `make_screenshots.py`, `docs/images/` – Bilder der GitHub-Seite
 
 ## Testen
 - `.venv\Scripts\python.exe tests\smoke_test.py` → „✅ Alle Tests bestanden“
 - EXE: `set REMSTUDIO_SELFTEST=%TEMP%\st.txt` + `RemStudio3D.exe` → Datei beginnt mit `ok`
 
 ## Changelog (neueste oben, max. 15 Zeilen – Details in docs/LOG.md)
+- 2026-10-10 – GitHub-Seite neu gestaltet (Bilder, Icons, README EN/DE); SignPath in Branch `signpath` zurückgestellt – siehe LOG.md
 - 2026-10-10 – Release v1.0.1 (Bugfix F-026) – __init__.py, .gitignore, docs/release-notes/v1.0.1.md – siehe LOG.md
 - 2026-10-10 – Projektordner → „RemStudio Projekt“, UEBERGABE.md, Release-Text-Vorlage – siehe LOG.md
 - 2026-10-10 – Doku-System (CLAUDE.md, docs/), Smoke-Test, Bugfix F-026 – lokal committet – siehe LOG.md

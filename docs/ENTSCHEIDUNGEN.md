@@ -61,3 +61,17 @@
 
 ## 2026-10-10 – Doku: öffentlich → Platzhalter
 **Gewählt:** Doku-Dateien enthalten keine persönlichen Pfade/E-Mails/Windows-Benutzernamen (Repo ist öffentlich); Befehle mit relativen Pfaden oder `%LOCALAPPDATA%`.
+
+## 2026-10-10 – GitHub-Seite: Bilder und Icons
+**Gewählt:**
+- **Alle Bilder per Skript** (`make_screenshots.py`) aus dem eingebauten Beispielbild – reproduzierbar, keine Urheberrechtsfragen, EN + DE.
+- **Eigene SVG-Icons** (`docs/images/icons/`) statt der App-Icons – die App nutzt die Microsoft-Schrift „Segoe Fluent Icons“; daraus gerenderte Bilder öffentlich zu verteilen ist lizenzrechtlich unklar.
+- **Bilder mit eigenem dunklen Hintergrund/Schatten** – sehen in GitHubs hellem und dunklem Modus gut aus (keine `<picture>`-Varianten nötig).
+- **Orange Modell auf heller Rückplatte** für die 3D-Bilder (Markenfarbe, gut erkennbar).
+- **Downloads-Badge weggelassen** (zeigt anfangs nur kleine Zahlen); Download-Button als großes oranges Badge.
+- **Pillow** nur als Werkzeug für das GIF (nicht in `requirements*.txt`, nicht im Programm).
+**Alternativen:** Screenshots per Bildschirm-Automation (fehleranfällig, persönliche Daten sichtbar); MP4 statt GIF (GitHub-README kann Videos aus dem Repo nicht direkt einbetten).
+
+## 2026-10-10 – SignPath-Signierung vorerst zurückgestellt
+**Gewählt:** Vorbereitung (GitHub-Actions-Workflow, `CODE_SIGNING.md`, `.signpath/`, `requirements-build.txt`, `build.py --skip-installer/--installer-from`) liegt fertig im **lokalen Branch `signpath`** (Commit 05def7e, nicht gepusht) – Nutzer will das vorerst nicht veröffentlichen. Hauptzweig + README ohne SignPath-Hinweise.
+**Später fortsetzen:** `git checkout signpath`, auf aktuellen `main` rebasen (`git rebase main`), Konflikte in Doku/README lösen, dann wie in der dortigen ANLEITUNG „SignPath-Signierung einrichten“.

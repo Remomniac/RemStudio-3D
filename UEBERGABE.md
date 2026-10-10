@@ -5,9 +5,9 @@ Neuen Chat **in diesem Ordner** (`Documents\Claude\RemStudio Projekt`) starten u
 ```
 Weiter mit Projekt RemStudio 3D (Projektordner: Documents\Claude\RemStudio Projekt). Lies zuerst PROGRESS.md und CLAUDE.md und befolge sie.
 Details stehen in docs/LOG.md, docs/FEHLER.md, docs/ANLEITUNG.md, docs/ENTSCHEIDUNGEN.md.
-Stand: v1.0.1 ist auf GitHub veröffentlicht (Remomniac/RemStudio-3D, Release mit Setup + Portable-ZIP, MIT, README EN/DE), enthält Bugfix F-026. Alles gepusht.
-Zuletzt geändert: remstudio/__init__.py (__version__ 1.0.1), .gitignore (Portable-ZIP), docs/release-notes/v1.0.1.md, Doku.
-Als Nächstes: auf Wunsch SignPath-Signierung vorbereiten (GitHub Actions + Code Signing Policy), sonst Nutzerwünsche abwarten. Release-Ablauf: docs/ANLEITUNG.md „Release“.
+Stand: v1.0.1 ist auf GitHub veröffentlicht (Remomniac/RemStudio-3D, Release mit Setup + Portable-ZIP, MIT). README EN/DE neu gestaltet (Banner, Animation, Screenshots; Bilder per make_screenshots.py). SignPath-Vorbereitung zurückgestellt im lokalen Branch `signpath`.
+Zuletzt geändert: README.md, README.de.md, make_screenshots.py (neu), docs/images/ (neu).
+Als Nächstes: Wünsche des Nutzers abwarten; Social-Preview lädt der Nutzer selbst hoch. SignPath nur auf Wunsch (Branch `signpath` auf main rebasen).
 Offene Fehler: F-025 – SmartScreen beim Installer: „Der Computer wurde durch Windows geschützt … Herausgeber: Unbekannter Herausgeber“ (unsigniert; Workaround „Weitere Informationen → Trotzdem ausführen“). F-027 – `cmd /c "build.bat"` aus Claudes PowerShell: „Der Befehl "build.bat" ist entweder falsch geschrieben oder konnte nicht gefunden werden.“ (Workaround: .venv/Scripts/python.exe build.py).
 NICHT erneut probieren: Microsoft Artifact Signing als Privatperson (nur USA/Kanada); selbstsigniertes Zertifikat (hilft nicht); Installer per GUI-Automation mit echtem Zielordner testen (F-023); EXE bauen, während RemStudio3D.exe läuft (F-012); Tests gegen echte Einstellungen statt Profil RemStudio3D_test (F-011).
 ```

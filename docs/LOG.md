@@ -129,3 +129,32 @@
 **Getestet:** Smoke-Test „✅ Alle Tests bestanden“; EXE-Selbsttest `ok shown=True items3d=1 files=2`; ProductVersion EXE + Setup = 1.0.1; `gh api …/releases/latest` → `v1.0.1`.
 **Offen:** F-025 (SmartScreen) → SignPath auf Wunsch.
 **Versionen:** `remstudio/__init__.py` 1.0.0 → 1.0.1
+
+### ~16:30 – SignPath-Signierung vorbereitet → zurückgestellt
+**Gemacht:** GitHub-Actions-Workflow (Build + zweistufige SignPath-Signierung + Release-Entwurf), `CODE_SIGNING.md`, Artefakt-Konfigurationen, feste Build-Versionen, `build.py`-Optionen; lokal getestet. Details stehen im Branch.
+**Ergebnis:** ⚠️ fertig, aber auf Wunsch des Nutzers **nicht veröffentlicht** – liegt im lokalen Branch `signpath` (05def7e). Siehe ENTSCHEIDUNGEN „SignPath-Signierung vorerst zurückgestellt“.
+
+### ~17:00 – GitHub-Seite verschönert (Bilder, Icons, neue README)
+**Warum:** Nutzer wünscht eine „sehr schöne“ GitHub-Seite mit Screenshots und Icons (SignPath vorerst zurückgestellt).
+**Gemacht:** Skript `make_screenshots.py` erzeugt aus dem Beispielbild: Banner (EN/DE), „So geht's“-Grafik in 3 Schritten, Rahmenformen-Übersicht, drehende 3D-Animation (GIF), 4 Programm-Screenshots mit runden Ecken + Schatten (EN/DE), Social-Preview-Bild. 12 eigene SVG-Icons. README.md + README.de.md neu aufgebaut (Banner, Download-Button, Badges, Navigation, Feature-Raster mit Icons, Screenshot-Galerie, Hinweis-Box SmartScreen, aufklappbare Bau-/Struktur-Abschnitte, Datenschutz). Vorschau über GitHub-Markdown-API im eingebauten Browser geprüft.
+**Dateien:** `make_screenshots.py` neu; `docs/images/*.png|gif`, `docs/images/icons/*.svg` neu; `README.md`, `README.de.md` neu geschrieben; SignPath-Hinweise aus beiden READMEs entfernt.
+**Befehle:**
+    .venv\\Scripts\\python.exe -m pip install pillow
+    .venv\\Scripts\\python.exe make_screenshots.py --lang all
+**Ausgabe (Fehler unterwegs):**
+    Windows fatal exception: access violation            → F-029
+    OpenGL.error.GLError … glGetAttribLocation …          → F-030
+    leere 2D-Vorschau / grauer Rand / abgeschnittene Texte → F-031
+    3D-Bild gedreht+gespiegelt: renderToArray liefert schon (Höhe, Breite) – meine Transponierung war falsch → entfernt
+**Ergebnis:** ✅ 16 Bilder (≈ 4,9 MB) + 12 Icons; README in Vorschau (dunkel) geprüft.
+**Getestet:** alle Bilder angesehen (Banner EN/DE, Schritte, Rahmen, GIF-Einzelbilder, Screenshots EN/DE, Export-Dialog ohne persönlichen Pfad); README-Vorschau gerendert über `gh api markdown`.
+**Offen:** Social-Preview-Bild muss der Nutzer in den GitHub-Einstellungen hochladen.
+
+### ~17:20 – Commits getrennt, README veröffentlicht
+**Warum:** Nutzer: „SignPath erstmal raus, sonst hochladen“.
+**Gemacht:** SignPath-Commit in Branch `signpath` gesichert (zusätzlich `backup-readme-mit-signpath` = alter kombinierter Stand), `main` auf `origin/main` zurückgesetzt, README-Dateien/Bilder/Skript übernommen, SignPath-Hinweise entfernt, Doku neu eingetragen, gepusht.
+**Befehle:**
+    git branch signpath 05def7e && git branch backup-readme-mit-signpath d25fafe
+    git reset --hard origin/main
+    git checkout d25fafe -- make_screenshots.py docs/images README.md README.de.md
+**Ergebnis:** ✅ siehe Push unten.

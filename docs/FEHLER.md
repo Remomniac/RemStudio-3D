@@ -204,3 +204,45 @@
 2. Direkt `.venv/Scripts/python.exe build.py` (Bash-Werkzeug, Projektordner) → ✅ Build fertig
 **Lösung:** Bei automatisiertem Bauen `build.py` direkt aufrufen (PyInstaller ist in `.venv` installiert). `build.bat` enthält ohnehin `pause` und ist für Doppelklick gedacht.
 **Vorbeugen:** siehe ANLEITUNG „Bauen“ / „Release“.
+
+## F-029 – make_screenshots: „Windows fatal exception: access violation“ bei numpy + QImage
+**Status:** 🟢 gelöst
+**Wann/Wo:** 2026-10-10 · `make_screenshots.py` → `main()` (Bild „steps“), `crop_alpha()` · Windows 11 · PySide6 6.12
+**Fehlermeldung:**
+    Windows fatal exception: access violation
+    Current thread … File "…make_screenshots.py", line 316 in main
+**Nachstellen:** `np.frombuffer(img.convertToFormat(...).constBits(), …)` – das konvertierte QImage ist ein Zwischenobjekt und wird sofort freigegeben.
+**Ursache:** numpy liest Speicher eines bereits gelöschten QImage.
+**Versuche:** 1. Zwischenobjekt in Variable halten + sofort `.copy()` → ✅
+**Lösung:** Hilfsfunktion `qimage_to_numpy()` (hält das konvertierte Bild, kopiert die Daten).
+**Vorbeugen:** QImage→numpy immer über `qimage_to_numpy()`.
+
+## F-030 – Zweite 3D-Ansicht: „GLError … glGetAttribLocation … ungültiger Wert“
+**Status:** 🟢 gelöst
+**Wann/Wo:** 2026-10-10 · `make_screenshots.py` (eigener `Viewer3D` + 3D-Ansicht im Hauptfenster) · pyqtgraph 0.14
+**Fehlermeldung:**
+    OpenGL.error.GLError: GLError(
+    	err = 1281,
+    	description = b'ung\xfcltiger Wert',
+    	baseOperation = glGetAttribLocation,
+    	cArguments = (9, b'a_position\x00'), …
+    Error while drawing item <pyqtgraph.opengl.items.GLMeshItem.GLMeshItem …>.
+**Nachstellen:** zwei `GLViewWidget` in einem Programm, ohne gemeinsame OpenGL-Kontexte → die zweite Ansicht bleibt leer.
+**Ursache:** pyqtgraph teilt Shader-Programme zwischen Ansichten; ohne „shared contexts“ gehören sie nur zum ersten Kontext.
+**Versuche:** 1. `QApplication.setAttribute(Qt.AA_ShareOpenGLContexts)` vor dem Erzeugen der QApplication → ✅
+**Lösung:** siehe Versuch 1 (in `make_screenshots.py`). Die App selbst hat nur eine 3D-Ansicht – nicht betroffen.
+**Vorbeugen:** Sobald irgendwo eine zweite 3D-Ansicht entsteht, das Attribut auch in `app.py` setzen.
+
+## F-031 – Screenshots: leere 2D-Vorschau, grauer Rand, abgeschnittene Texte
+**Status:** 🟢 gelöst
+**Wann/Wo:** 2026-10-10 · `make_screenshots.py` → `win.grab()` · Windows 11 mit 125 % Anzeige-Skalierung
+**Fehlermeldung:** keine – Bildfehler: (a) 2D-Vorschau schwarz/leer, (b) Screenshot 1872×1197 statt 1512×972 mit grauem Bereich, (c) nach Abschalten der Skalierung Texte abgeschnitten („Line art / comic (recon“).
+**Ursache:** (a) `QWidget.grab()` erfasst den OpenGL-Viewport der 2D-Vorschau nicht; (b) Fenster auf einem Bildschirm mit 125 % – grab-Bild und Zeichnung passen nicht zusammen; (c) ohne High-DPI-Skalierung rechnet Qt Schriften weiter mit 120 dpi.
+**Versuche:**
+1. `REMSTUDIO_NO_GL=1` (2D-Vorschau ohne OpenGL, sieht gleich aus) → ✅ (a)
+2. `QT_ENABLE_HIGHDPI_SCALING=0` → ✅ (b), aber ❌ (c)
+3. zusätzlich `QT_FONT_DPI=96` → ✅ (c)
+**Lösung:** alle drei Umgebungsvariablen am Anfang von `make_screenshots.py`.
+**Vorbeugen:** Screenshots nur über `make_screenshots.py` erzeugen.
+
+> F-028 (Installer aus langem Ordnerpfad) steht im lokalen Branch `signpath` – gehört zur zurückgestellten SignPath-Vorbereitung.

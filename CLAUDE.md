@@ -231,7 +231,7 @@ Der Prompt muss allein reichen, falls die Dateien nicht verfügbar sind.
   `<PROJEKT>` (= Projektordner), `<BENUTZER>` verwenden. Der GitHub-Name „Remomniac“ ist öffentlich und erlaubt.
 - **Aufbau:** `app.py` (Start + EXE-Selbsttest) · `remstudio/` (Code: `main_window.py`, `processing.py`, `mesh.py`,
   `export.py`, `bgremove.py`, `bg_editor.py`, `canvas.py`, `viewer3d.py`, `widgets.py`, `theme.py`, `i18n.py`) ·
-  `tests/smoke_test.py` · `installer/` (Inno Setup) · `build.py`/`build.bat` · `make_icon.py` · `RemStudio3D.spec`
+  `tests/smoke_test.py` · `installer/` (Inno Setup) · `build.py`/`build.bat` · `make_icon.py` · `make_screenshots.py` (README-Bilder → `docs/images/`) · `RemStudio3D.spec`
 - **Zielsystem:** Windows 10/11 (64 Bit); Entwicklung mit Python 3.12 in `.venv`.
 - **Nie committen:** `.venv/`, Build-Ergebnisse (`RemStudio3D.exe`, `RemStudio3D_files/`, `RemStudio3D-Setup.exe`,
   `version_info.txt`), STL-/Projektdateien, KI-Modelle (`*.onnx`), urheberrechtlich geschützte Testbilder (z. B. Comic-Screenshots).

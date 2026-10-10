@@ -94,6 +94,24 @@
     .venv\Scripts\python.exe make_icon.py --installer  # zusätzlich installer\wizard_*.bmp
 **Im Code:** `make_icon.py` → `render()`, `write_ico()`, `render_wizard_large()`, `render_wizard_small()`
 
+## Bilder für die GitHub-Seite – `make_screenshots.py`
+**Wofür:** erzeugt alle Bilder der README (Banner, „So geht's“, Rahmenformen, drehende 3D-Animation, Programm-Screenshots, Social-Preview) automatisch neu – z. B. nach Design-Änderungen.
+**Voraussetzungen:** `.venv`; für `rotate.gif` zusätzlich Pillow (`.venv\Scripts\python.exe -m pip install pillow`, nur Werkzeug, nicht Teil des Programms). Für den Hintergrund-Editor-Screenshot muss das KI-Modell „isnet-anime“ schon heruntergeladen sein (sonst ohne KI-Ergebnis).
+**So geht's:** Befehl starten, **nicht klicken**, solange Programmfenster kurz aufgehen (ca. 1–2 Minuten). Ergebnis in `docs/images/`.
+**Aufruf / Optionen:**
+    .venv\Scripts\python.exe make_screenshots.py                      # alles, Englisch + Deutsch
+    .venv\Scripts\python.exe make_screenshots.py --lang de            # nur deutsche Bilder (*-de.png)
+    .venv\Scripts\python.exe make_screenshots.py --only banner frames # nur bestimmte Bilder
+    # Namen: banner, steps, frames, rotate, main, 3d, editor, export, social
+**Beispiel:**
+    → == en …  docs\images\banner.png 2560x820 … docs\images\rotate.gif 840x520, 60 Bilder, ~1500 KB … == de …
+**Wichtig:** nutzt nur das eingebaute Beispielbild (`remstudio/samples.py`) – nie fremde/urheberrechtlich geschützte Bilder; Einstellungen nur im Test-Profil `RemStudio3D_test`; im Export-Dialog steht der neutrale Ordner `C:\3D prints` (kein persönlicher Pfad).
+**Feature-Icons:** `docs/images/icons/*.svg` sind eigene, einfache Linien-Icons (nicht die Segoe-Schrift der App, siehe ENTSCHEIDUNGEN).
+**Social-Preview:** `docs/images/social-preview.png` (1280×640) muss der Nutzer selbst hochladen: GitHub → Repo → Settings → General → „Social preview“ → Edit → Upload.
+**Vorschau der README vor dem Push:** GitHub-Markdown-API rendern lassen (`<GH> api markdown`) und lokal per `python -m http.server` ansehen (Vorschau-Dateien in `.preview/`, steht in `.git/info/exclude`).
+**Typische Fehler:** leere 2D-Vorschau (F-031), kaputte 3D-Ansicht/Shader-Fehler (F-030), Absturz „access violation“ (F-029), grauer Rand/abgeschnittene Texte bei 125 % Skalierung (F-031).
+**Im Code:** `make_screenshots.py` → `main()`, `render()` (freigestelltes 3D-Bild per Schwarz/Weiß-Trick), `card_background()`, `shadowed()`
+
 ## Installer testen (ohne Risiko)
 **Wofür:** Installation/Deinstallation prüfen, ohne den PC des Nutzers zu verändern.
 **Aufruf (Git-Bash, Testordner statt echtem Ziel):**
