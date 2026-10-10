@@ -8,6 +8,12 @@
   Verwandelt Bilder und Zeichnungen in druckfertige 3D-Wandbilder mit Rahmen – als STL für den 3D-Drucker.
 </p>
 
+<p align="center">
+  <a href="https://github.com/Remomniac/RemStudio-3D/releases/latest"><img alt="Release" src="https://img.shields.io/github/v/release/Remomniac/RemStudio-3D?color=f97316"></a>
+  <a href="LICENSE"><img alt="Lizenz: MIT" src="https://img.shields.io/badge/Lizenz-MIT-f97316"></a>
+  <img alt="Windows 10/11" src="https://img.shields.io/badge/Windows-10%20%7C%2011-1a1b1f">
+</p>
+
 ---
 
 ## Funktionen
@@ -96,3 +102,9 @@ RemStudio3D.spec       PyInstaller-Bauanleitung
 
 PySide6 (Qt, LGPL-3.0), OpenCV (Apache-2.0), NumPy (BSD), pyqtgraph (MIT), PyOpenGL (BSD),
 mapbox_earcut (ISC), ONNX Runtime (MIT); KI-Modelle aus dem rembg-Projekt (bitte deren Lizenzen beachten).
+
+## Lizenz
+
+RemStudio 3D ist Open Source unter der [MIT-Lizenz](LICENSE) – du darfst den Code frei verwenden, verändern und
+weitergeben, solange der Copyright-Hinweis erhalten bleibt. Für die mitgelieferten Bibliotheken und die
+KI-Modelle gelten deren eigene Lizenzen (siehe oben).
