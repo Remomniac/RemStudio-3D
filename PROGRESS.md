@@ -13,10 +13,12 @@ Windows-App, die Bilder/Zeichnungen (v. a. Comics) in druckfertige 3D-Wandbilder
 - README englisch (`README.md`) + deutsch (`README.de.md`); GitHub-Beschreibung/Topics/Release-Text englisch.
 - Doku-System nach `CLAUDE.md` eingerichtet (`docs/`), Schnelltest `tests/smoke_test.py` (alle grün).
 - **Lokal committet, noch NICHT gepusht:** Bugfix F-026 (Kreisrahmen → 3D-Netz nicht geschlossen), `tests/`, Doku.
+- Projektordner heißt jetzt `RemStudio Projekt`; Übergabe-Prompt in `UEBERGABE.md`.
 
 ## Nächste Schritte
 1. Nutzer fragen, ob Bugfix + Doku gepusht werden sollen → dann Version auf **1.0.1** erhöhen
-   (`remstudio/__init__.py`), `build.bat`, Smoke-Test, Release `v1.0.1` mit Setup + Portable-ZIP (Ablauf: ANLEITUNG „Release“).
+   (`remstudio/__init__.py`), `build.bat`, Smoke-Test, Release `v1.0.1` mit Setup + Portable-ZIP (Ablauf: ANLEITUNG „Release“,
+   Text-Vorlage `docs/release-notes/v1.0.0.md`).
 2. SmartScreen-Warnung (F-025): auf Wunsch SignPath-Foundation-Signierung vorbereiten (GitHub-Actions-Build +
    „Code Signing Policy“-Seite); Antrag stellt der Nutzer selbst auf signpath.org.
 
@@ -40,6 +42,7 @@ Windows-App, die Bilder/Zeichnungen (v. a. Comics) in druckfertige 3D-Wandbilder
 - EXE: `set REMSTUDIO_SELFTEST=%TEMP%\st.txt` + `RemStudio3D.exe` → Datei beginnt mit `ok`
 
 ## Changelog (neueste oben, max. 15 Zeilen – Details in docs/LOG.md)
+- 2026-10-10 – Projektordner → „RemStudio Projekt“, UEBERGABE.md, Release-Text-Vorlage – siehe LOG.md
 - 2026-10-10 – Doku-System (CLAUDE.md, docs/), Smoke-Test, Bugfix F-026 – lokal committet – siehe LOG.md
 - 2026-10-10 – README englisch + deutsch, GitHub-Texte englisch – README*.md – siehe LOG.md
 - 2026-10-10 – MIT-Lizenz – LICENSE, README – siehe LOG.md

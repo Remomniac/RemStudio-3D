@@ -95,3 +95,15 @@
 **Nicht geschafft / offen:** Push + Release v1.0.1 (Nutzer fragen); Code-Signierung (F-025, SignPath vorbereiten auf Wunsch).
 **Neue/geänderte Fehler:** F-001 … F-026 angelegt (F-025 🟡, sonst 🟢).
 **Neue/geänderte Anleitungen:** ANLEITUNG.md komplett neu (Bedienung, Sprache, Einstellungen, Modelle, start.bat, Smoke-Test, Build, Selbsttest, Logo, Installer-Test, Release, GitHub-Texte).
+
+## Session 2026-10-10 ~15:30 (Chat 2, Fortsetzung)
+**Ausgangslage:** Doku-System eingerichtet, lokal 1 Commit vor origin.
+**Vorhaben:** Alle Dateien für den nächsten Chat in einen Ordner `RemStudio Projekt` bringen.
+
+### ~15:30 – Projektordner umbenannt zu „RemStudio Projekt“
+**Warum:** Nutzer will den nächsten Chat im Ordner `Documents\Claude\RemStudio Projekt` starten; Variante „ganzes Projekt dorthin“ gewählt (nur eine Kopie).
+**Gemacht:** RemStudio 3D normal geschlossen; leeren Zielordner entfernt und `RemStudio` → `RemStudio Projekt` umbenannt (Git-Verlauf, `.venv`, EXE bleiben erhalten); `UEBERGABE.md` (Übergabe-Prompt + Ordnerübersicht) und `docs/release-notes/v1.0.0.md` (Release-Text-Vorlage) ergänzt.
+**Befehle:**
+    Rename-Item -LiteralPath "<…>\Claude\RemStudio" -NewName "RemStudio Projekt"
+**Ergebnis:** ✅ Git `main…origin/main [ahead 1]`, venv ok, Smoke-Test „Alle Tests bestanden“, EXE-Selbsttest `ok`.
+**Offen:** `build.bat` im Pfad mit Leerzeichen noch nicht neu ausgeführt (sollte funktionieren, Pfade werden als Liste übergeben).
