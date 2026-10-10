@@ -107,3 +107,25 @@
     Rename-Item -LiteralPath "<…>\Claude\RemStudio" -NewName "RemStudio Projekt"
 **Ergebnis:** ✅ Git `main…origin/main [ahead 1]`, venv ok, Smoke-Test „Alle Tests bestanden“, EXE-Selbsttest `ok`.
 **Offen:** `build.bat` im Pfad mit Leerzeichen noch nicht neu ausgeführt (sollte funktionieren, Pfade werden als Liste übergeben).
+
+## Session 2026-10-10 ~16:00 (Chat 3)
+**Ausgangslage:** v1.0.0 veröffentlicht; lokal 2 Commits (Bugfix F-026, Smoke-Test, Doku) nicht gepusht.
+**Vorhaben:** Nutzer hat „ja“ gesagt → pushen und v1.0.1 veröffentlichen.
+
+### ~16:00 – Release v1.0.1 veröffentlicht
+**Warum:** Bugfix F-026 (Kreisrahmen → 3D-Netz nicht geschlossen) zu den Nutzern bringen.
+**Gemacht:** Version erhöht, Smoke-Test, Build, EXE-Selbsttest, Portable-ZIP, Release-Text, Commit + Tag + Push, GitHub-Release mit beiden Dateien.
+**Dateien:** `remstudio/__init__.py` → `__version__` 1.0.0 → 1.0.1; `.gitignore` → `/RemStudio3D-*-portable.zip` ergänzt (ZIP war nicht ignoriert); `docs/release-notes/v1.0.1.md` neu (Abschnitt „What's new in 1.0.1“).
+**Befehle:**
+    .venv\Scripts\python.exe tests\smoke_test.py
+    .venv/Scripts/python.exe build.py
+    git commit -m "RemStudio 3D v1.0.1 …" && git tag -a v1.0.1 -m "RemStudio 3D v1.0.1" && git push && git push origin v1.0.1
+    <GH> release create v1.0.1 RemStudio3D-Setup.exe RemStudio3D-1.0.1-portable.zip --repo Remomniac/RemStudio-3D --title "RemStudio 3D v1.0.1" --notes-file docs/release-notes/v1.0.1.md --latest
+**Ausgabe:** erster Build-Versuch per `cmd /c "build.bat < NUL"`:
+    cmd : Der Befehl "build.bat" ist entweder falsch geschrieben oder
+    konnte nicht gefunden werden.
+→ F-027, Workaround `build.py` direkt.
+**Ergebnis:** ✅ https://github.com/Remomniac/RemStudio-3D/releases/tag/v1.0.1 (latest), Assets: Setup 81,8 MB, Portable-ZIP 117,7 MB.
+**Getestet:** Smoke-Test „✅ Alle Tests bestanden“; EXE-Selbsttest `ok shown=True items3d=1 files=2`; ProductVersion EXE + Setup = 1.0.1; `gh api …/releases/latest` → `v1.0.1`.
+**Offen:** F-025 (SmartScreen) → SignPath auf Wunsch.
+**Versionen:** `remstudio/__init__.py` 1.0.0 → 1.0.1

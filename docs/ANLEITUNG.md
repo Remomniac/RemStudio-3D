@@ -75,7 +75,7 @@
 **Beispiel:**
     → == 1/3 Programm bauen (Version 1.0.0) … == 3/3 Installer bauen …
     → Fertig: …\RemStudio3D.exe  …\RemStudio3D-Setup.exe
-**Typische Fehler:** „RemStudio3D.exe läuft noch“ → Programm schließen (F-012); `UnicodeDecodeError` (F-021, gelöst).
+**Typische Fehler:** „RemStudio3D.exe läuft noch“ → Programm schließen (F-012); `UnicodeDecodeError` (F-021, gelöst); `cmd /c build.bat` „nicht gefunden“ bei automatisiertem Aufruf → `build.py` direkt starten (F-027).
 **Nur Installer neu bauen** (wenn das Programm unverändert ist):
     "<ISCC>" /Q "/DSourceDir=%TEMP%\RemStudio3D-build\dist\RemStudio3D" /DAppVersion=1.0.0 installer\RemStudio3D.iss
 **Im Code:** `build.py` → `main()`, `is_running()`, `find_iscc()`, `write_version_info()`; `RemStudio3D.spec`; `installer/RemStudio3D.iss`
@@ -109,12 +109,16 @@
 **So geht's:**
 1. Version in `remstudio/__init__.py` erhöhen (z. B. `1.0.0` → `1.0.1`).
 2. `.venv\Scripts\python.exe tests\smoke_test.py` → alles grün.
-3. `build.bat` (Programm vorher schließen).
-4. Portable-ZIP erstellen: Ordner „RemStudio 3D/“ mit `RemStudio3D.exe` + `RemStudio3D_files/` → `RemStudio3D-<version>-portable.zip`.
+3. `build.bat` (Programm vorher schließen) – automatisiert lieber `.venv\Scripts\python.exe build.py` (F-027). Danach EXE-Selbsttest (→ `ok`).
+4. Portable-ZIP erstellen: Ordner „RemStudio 3D/“ mit `RemStudio3D.exe` + `RemStudio3D_files/` → `RemStudio3D-<version>-portable.zip` (wird per `.gitignore` ignoriert). PowerShell:
+       $d = "$env:TEMP\rs_portable\RemStudio 3D"; New-Item -ItemType Directory -Force $d | Out-Null
+       Copy-Item .\RemStudio3D.exe $d; Copy-Item .\RemStudio3D_files $d -Recurse
+       Compress-Archive -Path $d -DestinationPath .\RemStudio3D-1.0.1-portable.zip -Force
+   Release-Text: letzte Datei in `docs/release-notes/` kopieren → `vX.Y.Z.md`, Versionsnummern + Abschnitt „What's new“ anpassen.
 5. Commit + Tag + Push + Release:
        git add -A && git commit -m "…"
        git tag -a v1.0.1 -m "RemStudio 3D v1.0.1" && git push && git push origin v1.0.1
-       <GH> release create v1.0.1 RemStudio3D-Setup.exe RemStudio3D-1.0.1-portable.zip --repo Remomniac/RemStudio-3D --title "RemStudio 3D v1.0.1" --notes-file notes.md --latest
+       <GH> release create v1.0.1 RemStudio3D-Setup.exe RemStudio3D-1.0.1-portable.zip --repo Remomniac/RemStudio-3D --title "RemStudio 3D v1.0.1" --notes-file docs/release-notes/v1.0.1.md --latest
 **Hinweise:** Release-Texte englisch; Hinweis auf SmartScreen beibehalten (F-025). Commit-Nachrichten enden mit `Co-Authored-By: Claude …`.
 **Git-Einstellungen (nur dieses Repo):** `user.name=Remomniac`, `user.email=<ID>+Remomniac@users.noreply.github.com`, Credential-Helper = `gh auth git-credential`.
 

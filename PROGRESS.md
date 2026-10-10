@@ -5,26 +5,24 @@ Windows-App, die Bilder/Zeichnungen (v. a. Comics) in druckfertige 3D-Wandbilder
 3D-Drucker) – so einfach bedienbar wie möglich. Open Source (MIT) auf GitHub: https://github.com/Remomniac/RemStudio-3D
 
 ## Aktueller Stand
-- Version **1.0.0** veröffentlicht (GitHub-Release mit `RemStudio3D-Setup.exe` + Portable-ZIP).
+- Version **1.0.1** veröffentlicht (GitHub-Release mit `RemStudio3D-Setup.exe` + Portable-ZIP), enthält Bugfix F-026.
 - Funktionen komplett: KI-Hintergrund-Entfernung (Editor startet nach dem Laden), Motiv-Erkennung, Rahmenformen,
   automatische Stege, Druckbarkeits-Prüfung, Pinsel/Radierer/Steg, Rückplatte, Aufhängung, 3D-Vorschau,
   STL/SVG/PNG-Export mit Aufteilen, Projekte (`.remstudio`), GPU-Vorschau, dunkles Design (Orange), Englisch/Deutsch.
 - Installer (Inno Setup 6.7, dunkel, pro Benutzer, en/de) und Build-Skript `build.bat` → EXE + Setup im Hauptordner.
 - README englisch (`README.md`) + deutsch (`README.de.md`); GitHub-Beschreibung/Topics/Release-Text englisch.
 - Doku-System nach `CLAUDE.md` eingerichtet (`docs/`), Schnelltest `tests/smoke_test.py` (alle grün).
-- **Lokal committet, noch NICHT gepusht:** Bugfix F-026 (Kreisrahmen → 3D-Netz nicht geschlossen), `tests/`, Doku.
+- Alles gepusht, `main` = `origin/main`. Release-Texte liegen in `docs/release-notes/`.
 - Projektordner heißt jetzt `RemStudio Projekt`; Übergabe-Prompt in `UEBERGABE.md`.
 
 ## Nächste Schritte
-1. Nutzer fragen, ob Bugfix + Doku gepusht werden sollen → dann Version auf **1.0.1** erhöhen
-   (`remstudio/__init__.py`), `build.bat`, Smoke-Test, Release `v1.0.1` mit Setup + Portable-ZIP (Ablauf: ANLEITUNG „Release“,
-   Text-Vorlage `docs/release-notes/v1.0.0.md`).
-2. SmartScreen-Warnung (F-025): auf Wunsch SignPath-Foundation-Signierung vorbereiten (GitHub-Actions-Build +
+1. SmartScreen-Warnung (F-025): auf Wunsch SignPath-Foundation-Signierung vorbereiten (GitHub-Actions-Build +
    „Code Signing Policy“-Seite); Antrag stellt der Nutzer selbst auf signpath.org.
+2. Sonst: Wünsche/Rückmeldungen des Nutzers zu v1.0.1 abwarten.
 
 ## Offene Fehler (Details in docs/FEHLER.md)
 - F-025 – SmartScreen „Der Computer wurde durch Windows geschützt“ beim Installer (unsigniert) – 🟡 Workaround: „Weitere Informationen → Trotzdem ausführen“
-- F-026 – Kreisrahmen: 3D-Netz nicht geschlossen – 🟢 gelöst, aber erst lokal (noch nicht in Release v1.0.0)
+- F-027 – `cmd /c build.bat` aus Claudes PowerShell „nicht gefunden“ – 🟡 Workaround: `build.py` direkt
 
 ## Wichtige Dateien
 - `app.py` – Start, Sprache/Locale, EXE-Selbsttest (`REMSTUDIO_SELFTEST`)
@@ -42,6 +40,7 @@ Windows-App, die Bilder/Zeichnungen (v. a. Comics) in druckfertige 3D-Wandbilder
 - EXE: `set REMSTUDIO_SELFTEST=%TEMP%\st.txt` + `RemStudio3D.exe` → Datei beginnt mit `ok`
 
 ## Changelog (neueste oben, max. 15 Zeilen – Details in docs/LOG.md)
+- 2026-10-10 – Release v1.0.1 (Bugfix F-026) – __init__.py, .gitignore, docs/release-notes/v1.0.1.md – siehe LOG.md
 - 2026-10-10 – Projektordner → „RemStudio Projekt“, UEBERGABE.md, Release-Text-Vorlage – siehe LOG.md
 - 2026-10-10 – Doku-System (CLAUDE.md, docs/), Smoke-Test, Bugfix F-026 – lokal committet – siehe LOG.md
 - 2026-10-10 – README englisch + deutsch, GitHub-Texte englisch – README*.md – siehe LOG.md

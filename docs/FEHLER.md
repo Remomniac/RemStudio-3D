@@ -174,7 +174,7 @@
 **Dauerhaft:** Code-Signierung (Empfehlung: SignPath Foundation, kostenlos für Open Source – Antrag durch den Nutzer).
 
 ## F-026 – Kreisrahmen: 3D-Netz nicht geschlossen (Beispielbild, 6 px/mm)
-**Status:** 🟢 gelöst (lokal; nicht in Release v1.0.0 enthalten)
+**Status:** 🟢 gelöst – veröffentlicht in v1.0.1 (v1.0.0 enthält den Fehler noch)
 **Wann/Wo:** 2026-10-10 · `remstudio/processing.py` → `process()` Schritt 8; `remstudio/mesh.py` → `mask_polygons()`
 **Fehlermeldung:** keine – `tests/smoke_test.py`:
     ❌ 3D-Netz geschlossen: circle, Rückplatte=False, motiv – 91400 Dreiecke
@@ -190,3 +190,17 @@
 `mask_polygons()`: Löcher mit Fläche ≤ 0,05 mm² weglassen. Ergebnis zusätzlich kleiner (≈ 30 000 statt 91 000 Dreiecke).
 **Getestet:** Smoke-Test grün; alle 5 Formen × Rückplatte an/aus bei 10 und 16 px/mm geschlossen.
 **Vorbeugen:** `tests/smoke_test.py` vor jedem Release laufen lassen.
+
+## F-027 – `cmd /c "build.bat"` aus dem PowerShell-Tool: „Befehl nicht gefunden“
+**Status:** 🟡 Workaround
+**Wann/Wo:** 2026-10-10 · `build.bat` · Windows 11, Aufruf durch Claude über das PowerShell-Werkzeug · v1.0.1-Build
+**Fehlermeldung:**
+    cmd : Der Befehl "build.bat" ist entweder falsch geschrieben oder
+    konnte nicht gefunden werden.
+**Nachstellen:** Im PowerShell-Werkzeug von Claude `cmd /c "build.bat < NUL"` im Projektordner ausführen.
+**Ursache:** unklar, Vermutung: `cmd` startet dort nicht im Projektordner (bzw. Pfad mit Leerzeichen „RemStudio Projekt“). Doppelklick auf `build.bat` ist nicht betroffen.
+**Versuche:**
+1. `cmd /c "build.bat < NUL"` → ❌ Meldung oben
+2. Direkt `.venv/Scripts/python.exe build.py` (Bash-Werkzeug, Projektordner) → ✅ Build fertig
+**Lösung:** Bei automatisiertem Bauen `build.py` direkt aufrufen (PyInstaller ist in `.venv` installiert). `build.bat` enthält ohnehin `pause` und ist für Doppelklick gedacht.
+**Vorbeugen:** siehe ANLEITUNG „Bauen“ / „Release“.
